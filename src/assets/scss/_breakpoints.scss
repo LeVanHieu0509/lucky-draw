@@ -1,0 +1,20 @@
+@use "sass:math";
+
+// Breakpoints - xs < 576px | sm 576px > < 768px | md 768px > < 992px | lg 992px > < 1200px | xl 1200px > < 1600px | xxl > 1600px
+$screen-sm: 576px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1200px;
+$screen-xxl: 1600px;
+
+// Media queries
+$mobile: "only screen and (max-width: #{math.div($screen-sm - 1, 1px)})";
+$tablet: "only screen and (min-width: #{math.div($screen-sm, 1px)}) and (max-width: #{math.div($screen-md - 1, 1px)})";
+$desktop: "only screen and (min-width: #{math.div($screen-md, 1px)})";
+$small-desktop: "only screen and (min-width: #{math.div($screen-md, 1px)}) and (max-width: #{math.div($screen-xl - 1, 1px)})";
+$medium-desktop: "only screen and (min-width: #{math.div($screen-xl, 1px)}) and (max-width: #{math.div($screen-xxl - 1, 1px)})";
+$tablet-desktop: "only screen and (min-width: #{math.div($screen-sm, 1px)})";
+$mobile-tablet: "only screen and (max-width: #{math.div($screen-md - 1, 1px)})";
+
+// Mobile landscape
+$mobile-landscape: "only screen and (max-height: #{math.div($screen-sm - 1, 1px)})";

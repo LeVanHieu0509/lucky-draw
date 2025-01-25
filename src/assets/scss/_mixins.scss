@@ -1,0 +1,22 @@
+@use "./variables" as vars;
+
+@mixin flex-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin shadow($size, $scale-factor: 1) {
+  @if $size == "large" {
+    box-shadow: calc(0.625rem * #{$scale-factor})
+      calc(0.625rem * #{$scale-factor})
+      0
+      vars.$color-slot-shadow;
+  } @else {
+    box-shadow: calc(0.4375rem * #{$scale-factor})
+      calc(0.4375rem * #{$scale-factor})
+      0
+      vars.$color-slot-shadow;
+  }
+}

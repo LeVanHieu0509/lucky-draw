@@ -1,0 +1,124 @@
+@use "sass:math";
+@use "./variables" as vars;
+@use "./_mixins" as mixins;
+
+.input-group {
+  margin: 0 0 4rem 0;
+
+  &--2-column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .input-label {
+      margin: 0;
+    }
+  }
+}
+
+.input-label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.input-field {
+  background-color: vars.$color-input-background;
+  border-radius: 0.25rem;
+  border: none;
+  padding: 1.875rem 1.875rem;
+  font-family: inherit;
+  font-size: 1.5rem;
+  line-height: 1.25em;
+  color: vars.$color-input-text;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  @include mixins.shadow("large");
+
+  &:read-only {
+    background-color: vars.$color-input-background;
+    border: none;
+    color: vars.$color-input-text;
+    cursor: not-allowed;
+  }
+
+  /* Placeholder */
+  &::placeholder {
+    color: vars.$color-input-placeholder;
+  }
+
+  /* Auto complete styles */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    background-clip: content-box !important;
+    -webkit-box-shadow: 0 0 0 3.125rem vars.$color-input-background inset !important;
+    -webkit-text-fill-color: vars.$color-input-text !important;
+  }
+}
+
+.input-field--textarea {
+  min-width: 100%;
+  max-width: 100%;
+  resize: vertical;
+}
+
+.input--switch {
+  position: relative;
+  display: inline-block;
+  width: vars.$switch-slider-width;
+  height: vars.$switch-slider-height;
+  border-radius: vars.$switch-slider-height;
+  flex: 0 0 vars.$switch-slider-width;
+  @include mixins.shadow("small");
+  margin: 0 0 0 1rem;
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: vars.$color-input-background;
+    transition: 0.4s;
+    border-radius: vars.$switch-slider-height;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: vars.$switch-handle-diameter;
+      width: vars.$switch-handle-diameter;
+      left: math.div(
+        vars.$switch-slider-height - vars.$switch-handle-diameter,
+        2
+      );
+      bottom: math.div(
+        vars.$switch-slider-height - vars.$switch-handle-diameter,
+        2
+      );
+      background-color: vars.$color-switch-handle-disabled;
+      transition: 0.4s;
+      border-radius: vars.$switch-handle-diameter;
+    }
+  }
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  input:checked + .slider:before {
+    background-color: vars.$color-switch-handle;
+    transform: translateX(
+      vars.$switch-slider-width - vars.$switch-handle-diameter - math.div(
+          (vars.$switch-slider-height - vars.$switch-handle-diameter),
+          2
+        ) * 2
+    );
+  }
+}

@@ -1,0 +1,127 @@
+@use "sass:color";
+@use "sass:string";
+@use "./variables" as vars;
+
+#lucky-draw {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: vars.$z-index-lucky-draw; // Ensure contents are on top of confetti
+}
+
+.title {
+  height: auto;
+  max-width: vars.$title-width;
+  width: 100%;
+  margin: vars.$title-margin-top 0 vars.$title-margin-bottom 0;
+  position: relative;
+  z-index: vars.$z-index-title; // Ensure title on top of sunburst
+  color: vars.$color-title-border;
+  display: inline-block;
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.control-group {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  // Fixing the notch issue on iOS when using "viewport-fit=cover"
+  --safe-area-inset-right: 0px;
+
+  @supports (top: constant(safe-area-inset-top)) {
+    --safe-area-inset-right: constant(safe-area-inset-right);
+  }
+
+  @supports (top: env(safe-area-inset-top)) {
+    --safe-area-inset-right: env(safe-area-inset-right);
+  }
+
+  @supports (padding: max(0px)) {
+    right: max(1rem, var(--safe-area-inset-right));
+  }
+
+  .icon-button {
+    margin: 0 0 0 1.5rem;
+  }
+}
+
+.slot {
+  position: relative;
+
+  &__outer {
+    width: vars.$slot-width;
+    height: vars.$slot-height;
+    padding: vars.$slot-border-width;
+    margin: 0 auto;
+    border-radius: vars.$slot-border-radius;
+    // @include mixins.shadow("large");
+    background: vars.$color-slot-background url("../images/light-blubs.svg");
+    position: relative;
+    z-index: vars.$z-index-slot; // Ensure slot is on top of sunburst
+  }
+
+  &__inner {
+    background-color: vars.$color-slot-inner-background;
+    width: 100%;
+    height: 100%;
+    border-radius: vars.$slot-border-radius;
+    position: relative;
+    overflow: hidden;
+    padding: vars.$slot-inner-padding;
+  }
+
+  &__shadow {
+    // background: linear-gradient(
+    //   180deg,
+    //   color.scale(vars.$color-white, $alpha: -0.9) 0.13%,
+    //   color.scale(vars.$color-black, $alpha: -0.9) 100%
+    // );
+    height: 5.625rem;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom-right-radius: vars.$slot-border-radius;
+    border-bottom-left-radius: vars.$slot-border-radius;
+  }
+
+  // @each $media-query, $factor in vars.$scale-factors {
+  //   @if type-of($media-query) == "string" {
+  //     @media #{string.unquote($media-query)} {
+  //       width: calc(vars.$slot-width * #{$factor});
+  //       height: calc(vars.$slot-height * #{$factor});
+  //       margin: 0 auto;
+
+  //       &__outer {
+  //         transform: scale($factor);
+  //         transform-origin: top left;
+  //       }
+  //     }
+  //   }
+  // }
+}
+
+.reel {
+  width: 100%;
+
+  > div {
+    height: vars.$reel-item-height;
+    font-size: 3.75rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: vars.$reel-item-height;
+    color: vars.$color-slot-text;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    transform: translate3d(0, 0, 0); // Fix iOS flicker issue
+  }
+}
+
+// Other components remain unchanged

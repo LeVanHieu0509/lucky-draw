@@ -1,0 +1,125 @@
+@use "sass:string";
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap");
+
+*:not(input, textarea, select) {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+* {
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  line-height: 1.5;
+  font-family: "Nunito Sans", 微軟正黑體, "Microsoft JhengHei",
+    "Microsoft JhengHei UI", "Microsoft YaHei", "Microsoft YaHei UI",
+    "PingFang TC", "Lantinghei TC", "Heiti TC", "Apple LiGothic", "PMingLiU",
+    Arial, sans-serif;
+}
+
+#app {
+  background: linear-gradient(
+    240deg,
+    #ff0000 0.13%,
+    #ff4040 26.19%,
+    #ff8080 52.6%,
+    #ffbfbf 79.08%,
+    #ffffff 100%
+  );
+  color: #ffffff; // Replace with a valid color value
+  padding: 0 3.125rem;
+  min-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  --safe-area-inset-top: 0px;
+  --safe-area-inset-right: 0px;
+  --safe-area-inset-bottom: 0px;
+  --safe-area-inset-left: 0px;
+
+  @media (max-width: 768px) {
+    padding: 0 5%;
+  }
+
+  // Fixing the notch issue on iOS when using "viewport-fit=cover"
+  @supports (top: constant(safe-area-inset-top)) {
+    --safe-area-inset-top: constant(safe-area-inset-top);
+    --safe-area-inset-right: constant(safe-area-inset-right);
+    --safe-area-inset-bottom: constant(safe-area-inset-bottom);
+    --safe-area-inset-left: constant(safe-area-inset-left);
+  }
+
+  @supports (top: env(safe-area-inset-top)) {
+    --safe-area-inset-top: env(safe-area-inset-top);
+    --safe-area-inset-right: env(safe-area-inset-right);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom);
+    --safe-area-inset-left: env(safe-area-inset-left);
+  }
+
+  @supports (padding: string.unquote("max(0px)")) {
+    & {
+      padding: 0
+        string.unquote(
+          "max(3.125rem, var(--safe-area-inset-right)) 0 max(3.125rem, var(--safe-area-inset-left))"
+        );
+
+      @media (max-width: 768px) {
+        padding: 0
+          string.unquote(
+            "max(5%, var(--safe-area-inset-right)) 0 max(5%, var(--safe-area-inset-left))"
+          );
+      }
+    }
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.125rem 0;
+  width: 100%;
+  max-width: 1200px; // Replace with the appropriate value
+  flex: 1 1 0;
+  min-height: min-content;
+}
+
+.footer {
+  width: 100%;
+  padding: 0.3125rem;
+  font-size: 0.75rem;
+  text-align: center;
+  box-sizing: border-box;
+  flex: 0 1 auto;
+}
+
+a {
+  color: #0000ff; // Replace with a valid link color
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:active {
+    text-decoration: underline;
+    color: #0000aa; // Replace with a hover link color
+  }
+}
+
+.align--right {
+  text-align: right;
+}
