@@ -1,2 +1,1850 @@
-html
 <pug src="./src/nested/index.pug"></pug>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+
+  <body ng-app="app" ng-class="'theme-' + theme" class="ng-scope theme-purple">
+    <div class="loader-block" id="loader" style="display: none"></div>
+    <div class="wrapper" ng-style="{'background-image': url_background}">
+      <!-- uiView: --><ui-view class="ng-scope"
+        ><id-lucky-draw
+          data="$ctrl.data"
+          setting="$ctrl.setting"
+          results="$ctrl.results"
+          is-limited="$ctrl.isLimited(r)"
+          class="ng-scope ng-isolate-scope"
+          ><header class="header">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="logo-zone hidden">
+                  <!-- ngIf: $ctrl.setting.info.logo -->
+                </div>
+
+                <div class="col-xs-12">
+                  <h1>
+                    <!-- ngIf: $ctrl.appState.name !== 'presentation' --><span
+                      class="event-name ng-binding ng-scope"
+                      ng-if="$ctrl.appState.name !== 'presentation'"
+                    >
+                      Lucky Draw Software </span
+                    ><!-- end ngIf: $ctrl.appState.name !== 'presentation' -->
+                    <!-- ngIf: $ctrl.appState.name === 'presentation' && $ctrl.setting.info.name -->
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div
+            ng-class="$ctrl.appState.name === 'presentation' ? 'main-padding' : 'main'"
+            class="main"
+          >
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-12">
+                  <section class="section section-prize">
+                    <div class="section-message">
+                      <h2
+                        ng-style="$ctrl.ux.style($ctrl.setting.colors.action_msg, 1)"
+                        ng-class="$ctrl.animClass.message"
+                        ng-switch=""
+                        on="$ctrl.state"
+                        class="winner-reveal"
+                        style=""
+                      >
+                        <!-- ngSwitchWhen: ready -->
+                        <!-- ngSwitchWhen: spin -->
+                        <!-- ngSwitchWhen: reveal -->
+                        <!-- ngSwitchWhen: complete|toconfirm|confirmed|cancel --><span
+                          ng-switch-when="complete|toconfirm|confirmed|cancel"
+                          ng-switch-when-separator="|"
+                          class="winner-name ng-binding ng-scope"
+                          ng-bind-html="$ctrl.namex"
+                          style=""
+                          >Xavier A. Reed</span
+                        ><!-- end ngSwitchWhen: -->
+                      </h2>
+                    </div>
+
+                    <div
+                      class="section-body"
+                      ng-class="$ctrl.animClass.setprize"
+                      style=""
+                    >
+                      <div
+                        class="section-body-inner section-body-inner-primary"
+                      >
+                        <ul class="slots">
+                          <!-- ngRepeat: n in $ctrl.machineSlots -->
+                          <li
+                            class="slot ng-scope slot-1of6 state-complete"
+                            ng-repeat="n in $ctrl.machineSlots"
+                            ng-class="'slot-1of'+$ctrl.slotsCss + ' state-'+$ctrl.state"
+                            style="overflow: hidden"
+                          >
+                            <!-- ngRepeat: i in $ctrl.characters[n] -->
+                            <div
+                              class="slotMachineContainer"
+                              style="
+                                transition: 1.236s ease-out;
+                                transform: matrix(1, 0, 0, 1, 0, -1750);
+                              "
+                            >
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    >4</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >2</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >3</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >0</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >8</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >1</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >5</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >6</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >9</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >7</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >4</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                            </div>
+                            <!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] -->
+
+                            <!-- ngIf: !$ctrl.characters[n] -->
+                          </li>
+                          <!-- end ngRepeat: n in $ctrl.machineSlots -->
+                          <li
+                            class="slot ng-scope slot-1of6 state-complete"
+                            ng-repeat="n in $ctrl.machineSlots"
+                            ng-class="'slot-1of'+$ctrl.slotsCss + ' state-'+$ctrl.state"
+                            style="overflow: hidden"
+                          >
+                            <!-- ngRepeat: i in $ctrl.characters[n] -->
+                            <div
+                              class="slotMachineContainer"
+                              style="
+                                transition: 1.978s ease-out;
+                                transform: matrix(1, 0, 0, 1, 0, -1250);
+                              "
+                            >
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    >3</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >4</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >0</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >9</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >5</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >8</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >1</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >2</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >6</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >7</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >3</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                            </div>
+                            <!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] -->
+
+                            <!-- ngIf: !$ctrl.characters[n] -->
+                          </li>
+                          <!-- end ngRepeat: n in $ctrl.machineSlots -->
+                          <li
+                            class="slot ng-scope slot-1of6 state-complete"
+                            ng-repeat="n in $ctrl.machineSlots"
+                            ng-class="'slot-1of'+$ctrl.slotsCss + ' state-'+$ctrl.state"
+                            style="overflow: hidden"
+                          >
+                            <!-- ngRepeat: i in $ctrl.characters[n] -->
+                            <div
+                              class="slotMachineContainer"
+                              style="
+                                transition: 2.156s ease-out;
+                                transform: matrix(1, 0, 0, 1, 0, -500);
+                              "
+                            >
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    >5</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >9</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >0</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >7</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >1</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >6</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >8</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >4</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >3</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >2</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >5</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                            </div>
+                            <!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] -->
+
+                            <!-- ngIf: !$ctrl.characters[n] -->
+                          </li>
+                          <!-- end ngRepeat: n in $ctrl.machineSlots -->
+                          <li
+                            class="slot ng-scope slot-1of6 state-complete"
+                            ng-repeat="n in $ctrl.machineSlots"
+                            ng-class="'slot-1of'+$ctrl.slotsCss + ' state-'+$ctrl.state"
+                            style="overflow: hidden"
+                          >
+                            <!-- ngRepeat: i in $ctrl.characters[n] -->
+                            <div
+                              class="slotMachineContainer"
+                              style="
+                                transition: 1.228s ease-out;
+                                transform: matrix(1, 0, 0, 1, 0, -1250);
+                              "
+                            >
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    >5</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >6</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >8</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >4</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >2</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >1</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >3</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >9</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >7</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >0</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >5</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                            </div>
+                            <!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] -->
+
+                            <!-- ngIf: !$ctrl.characters[n] -->
+                          </li>
+                          <!-- end ngRepeat: n in $ctrl.machineSlots -->
+                          <li
+                            class="slot ng-scope slot-1of6 state-complete"
+                            ng-repeat="n in $ctrl.machineSlots"
+                            ng-class="'slot-1of'+$ctrl.slotsCss + ' state-'+$ctrl.state"
+                            style="overflow: hidden"
+                          >
+                            <!-- ngRepeat: i in $ctrl.characters[n] -->
+                            <div
+                              class="slotMachineContainer"
+                              style="
+                                transition: 1.588s ease-out;
+                                transform: matrix(1, 0, 0, 1, 0, -2000);
+                              "
+                            >
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    >2</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >9</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >0</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >8</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >6</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >4</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >5</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >7</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >3</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >1</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >2</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                            </div>
+                            <!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] -->
+
+                            <!-- ngIf: !$ctrl.characters[n] -->
+                          </li>
+                          <!-- end ngRepeat: n in $ctrl.machineSlots -->
+                          <li
+                            class="slot ng-scope slot-1of6 state-complete"
+                            ng-repeat="n in $ctrl.machineSlots"
+                            ng-class="'slot-1of'+$ctrl.slotsCss + ' state-'+$ctrl.state"
+                            style="overflow: hidden"
+                          >
+                            <!-- ngRepeat: i in $ctrl.characters[n] -->
+                            <div
+                              class="slotMachineContainer"
+                              style="
+                                transition: 1.336s ease-out;
+                                transform: matrix(1, 0, 0, 1, 0, -500);
+                              "
+                            >
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    >5</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >7</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >8</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >1</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >2</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >4</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >6</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >9</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >3</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >0</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope ng-enter-prepare"
+                                ng-repeat="i in $ctrl.characters[n]"
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                    style=""
+                                    >5</span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                              <div
+                                class="slot-item ng-scope"
+                                ng-repeat="i in $ctrl.characters[n]"
+                                style=""
+                              >
+                                <div
+                                  class="slot-number"
+                                  ng-switch=""
+                                  on="$ctrl.state"
+                                >
+                                  <!-- ngSwitchWhen: ready -->
+                                  <!-- ngSwitchWhen: setprize -->
+                                  <!-- ngSwitchDefault: --><span
+                                    ng-switch-default=""
+                                    class="ng-binding ng-scope"
+                                  >
+                                  </span
+                                  ><!-- end ngSwitchWhen: -->
+                                </div>
+                              </div>
+                            </div>
+                            <!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] --><!-- end ngRepeat: i in $ctrl.characters[n] -->
+
+                            <!-- ngIf: !$ctrl.characters[n] -->
+                          </li>
+                          <!-- end ngRepeat: n in $ctrl.machineSlots -->
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="section-actions">
+                      <div class="section-head-actions">
+                        <a
+                          class="link-prev not-available"
+                          ng-mouseover="$ctrl.ux.mOver('prevnext')"
+                          ng-mouseleave="$ctrl.ux.mLeave('prevnext')"
+                          ng-class="$ctrl.state !== 'ready' || $ctrl.prizeIndex <= 0 ? 'not-available' : 'available'"
+                          ng-click="$ctrl.setPrize($ctrl.prizeIndex - 1)"
+                          style=""
+                        >
+                          <!-- ngIf: $ctrl.ux.hint.prevnext -->
+                          <i class="ion-chevron-left"></i>
+                        </a>
+
+                        <span class="prize-text ng-binding"> Giải Nhì </span>
+
+                        <span
+                          class="prize-text prize-count ion-person-add ng-binding"
+                          ng-class="$ctrl.animClass.prizecount"
+                          ng-show="$ctrl.prizes[$ctrl.prizeIndex].confirmed"
+                          style=""
+                        >
+                          2
+                        </span>
+
+                        <a
+                          class="link-next not-available"
+                          ng-mouseover="$ctrl.ux.mOver('prevnext')"
+                          ng-mouseleave="$ctrl.ux.mLeave('prevnext')"
+                          ng-class="$ctrl.state !== 'ready' || $ctrl.prizeIndex >= $ctrl.prizes.length - 1 ? 'not-available' : 'available'"
+                          ng-click="$ctrl.setPrize($ctrl.prizeIndex + 1)"
+                          style=""
+                        >
+                          <i class="ion-chevron-right"></i>
+                          <!-- ngIf: $ctrl.ux.hint.prevnext -->
+                        </a>
+                      </div>
+
+                      <div ng-switch="" on="$ctrl.state" class="section-button">
+                        <!-- ngSwitchWhen: ready -->
+
+                        <!-- ngSwitchWhen: spin -->
+
+                        <!-- ngSwitchWhen: complete -->
+                        <div
+                          ng-switch-when="complete"
+                          class="state-complete ng-scope"
+                          style=""
+                        >
+                          <a
+                            class="btn btn-yellow btn-yellow-secondary ng-binding"
+                            ng-click="$ctrl.save()"
+                            ng-mouseover="$ctrl.ux.mOver('confirm')"
+                            ng-mouseleave="$ctrl.ux.mLeave('confirm')"
+                          >
+                            <!-- ngIf: $ctrl.ux.hint.confirm -->
+                            Xác nhận
+                          </a>
+                          <a
+                            class="btn btn-primary ng-binding"
+                            ng-click="$ctrl.retry()"
+                            ng-mouseover="$ctrl.ux.mOver('confirm')"
+                            ng-mouseleave="$ctrl.ux.mLeave('confirm')"
+                          >
+                            Quay lại
+                            <!-- ngIf: $ctrl.ux.hint.confirm -->
+                          </a>
+                        </div>
+                        <!-- end ngSwitchWhen: -->
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hot-keys
+            enter="$ctrl.startstop()"
+            nextstep=""
+            confirm="$ctrl.save()"
+            cancel="$ctrl.retry()"
+            prev="$ctrl.setPrevPrize()"
+            next="$ctrl.setNextPrize()"
+            class="ng-isolate-scope"
+          >
+          </hot-keys>
+        </id-lucky-draw>
+      </ui-view>
+      <notification class="ng-isolate-scope"></notification>
+      <img width="1" height="1" appbackground="" ng-src="" />
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const slots = document.querySelectorAll(".slotMachineContainer");
+        const spinButton = document.querySelector(".btn-yellow");
+
+        // Hàm tạo số ngẫu nhiên từ 0 đến 9
+        function getRandomNumber() {
+          return Math.floor(Math.random() * 10);
+        }
+
+        // Hàm để dừng slot tại số ngẫu nhiên
+        function stopSlot(slot, stopNumber, spinDuration) {
+          const totalHeight = 1000; // 10 số, mỗi số cao 100px
+          if (stopNumber == 1) {
+            stopNumber = 2;
+          }
+          const stopPosition = stopNumber * 250; // Vị trí dừng dựa trên chiều cao 100px mỗi số
+          const fullRotation = totalHeight * 3; // Quay 3 vòng đầy đủ
+
+          // Đặt vị trí và dừng lại
+          setTimeout(() => {
+            slot.style.transition = `transform ${spinDuration}s ease-out`;
+            slot.style.transform = `translateY(-${fullRotation + stopPosition}px)`;
+
+            // Đặt lại vị trí sau khi dừng
+            setTimeout(() => {
+              console.log({ stopPosition });
+
+              slot.style.transition = `none`;
+              slot.style.transform = `translateY(-${stopPosition}px)`;
+            }, spinDuration * 600);
+          }, 100); // Delay để tạo hiệu ứng bắt đầu quay
+        }
+
+        // Hàm thực hiện hiệu ứng quay
+        function spinSlots() {
+          slots.forEach((slot, index) => {
+            const spinDuration = 1.5 + Math.random(); // Thời gian quay từ 1.5s đến 2.5s
+            const stopNumber = getRandomNumber(); // Số ngẫu nhiên để dừng
+
+            // Dừng từng slot với hiệu ứng
+            stopSlot(slot, stopNumber, spinDuration);
+          });
+        }
+
+        // Gắn sự kiện vào nút "Quay"
+        if (spinButton) {
+          spinButton.addEventListener("click", spinSlots);
+        } else {
+          console.error("Không tìm thấy nút 'Quay'!");
+        }
+      });
+    </script>
+  </body>
+</html>
