@@ -4,145 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Slot Machine</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-        background: #f0f0f0;
-      }
-      .slots-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        margin-top: 100px;
-      }
-      .slots {
-        display: flex;
-        position: relative;
-        width: 300px;
-        height: 100px;
-        overflow: hidden;
-        border: 2px solid #000;
-        border-radius: 10px;
-        background: #fff;
-      }
-      .reel {
-        width: 100px;
-        height: 100px;
-        background-size: 100% auto;
-        background-image: url("icons.png"); /* Replace with your icon sprite image */
-        background-position-y: 0;
-      }
-      .highlight {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 300px;
-        height: 100px;
-        border: 2px solid yellow;
-        z-index: 10;
-        pointer-events: none;
-      }
-      .win1 .highlight {
-        border-color: green;
-        animation: flash 0.5s alternate infinite;
-      }
-      @keyframes flash {
-        from {
-          opacity: 1;
-        }
-        to {
-          opacity: 0.5;
-        }
-      }
-      .spin-button {
-        margin-top: 20px;
-      }
-      button {
-        padding: 10px 20px;
-        font-size: 24px;
-        font-weight: bold;
-        background: #f5b70c;
-        color: #ff0404;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-      }
-      button:hover {
-        background: #ffcd42;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="slots-wrapper">
-      <div id="slots" class="slots">
-        <div class="reel"></div>
-        <div class="reel"></div>
-        <div class="reel"></div>
-        <span class="highlight"></span>
+    <div class="flex flex-col items-center relative">
+      <div class="slots-wrapper">
+        <div id="slots" class="slots">
+          <div class="reel slotMachineContainer"></div>
+          <div class="reel slotMachineContainer"></div>
+          <div class="reel slotMachineContainer"></div>
+          <span class="highlight"></span>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button type="button" id="spin-button" class="spin-button">SPIN</button>
       </div>
     </div>
 
-    <div class="spin-button">
-      <button type="button" onclick="rollAll()">SPIN</button>
-    </div>
-
-    <script>
-      const icon_height = 100;
-      const num_icons = 10;
-      const time_per_icon = 100;
-
-      const roll = (reel, offset = 0, winner_num) => {
-        const delta = (offset + 2) * num_icons + (num_icons - +winner_num + 1);
-
-        return new Promise((resolve) => {
-          const style = getComputedStyle(reel),
-            backgroundPositionY = parseFloat(style["background-position-y"]),
-            targetBackgroundPositionY =
-              backgroundPositionY + delta * icon_height,
-            normTargetBackgroundPositionY =
-              targetBackgroundPositionY % (num_icons * icon_height);
-
-          setTimeout(() => {
-            reel.style.transition = `background-position-y ${
-              (9 + 1 * delta) * time_per_icon
-            }ms cubic-bezier(.41,-0.01,.63,1.09)`;
-            reel.style.backgroundPositionY = `${
-              backgroundPositionY + delta * icon_height
-            }px`;
-          }, offset * 150);
-
-          setTimeout(
-            () => {
-              reel.style.transition = `none`;
-              reel.style.backgroundPositionY = `${normTargetBackgroundPositionY}px`;
-              resolve(delta % num_icons);
-            },
-            (9 + 1 * delta) * time_per_icon + offset * 150,
-          );
-        });
-      };
-
-      const rollAll = () => {
-        const reelsList = document.querySelectorAll(".slots > .reel");
-        const winner_num = String(Math.floor(Math.random() * 1000)).padStart(
-          3,
-          "0",
-        );
-        const winner_array = [...winner_num];
-
-        Promise.all(
-          [...reelsList].map((reel, i) => roll(reel, i, winner_array[i])),
-        ).then(() => {
-          document.querySelector(".slots").classList.add("win1");
-          setTimeout(() => {
-            document.querySelector(".slots").classList.remove("win1");
-          }, 2000);
-        });
-      };
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
