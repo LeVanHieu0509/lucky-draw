@@ -12,7 +12,7 @@ include ../mixins/icons
   #lucky-draw
     .title
       //- Pug loader currently does not handle webpack alias so we will use relative path here
-      include ../assets/images/title.svg
+      //- include ../assets/images/title.svg
 
     .slot
       .slot__outer
@@ -23,7 +23,9 @@ include ../mixins/icons
       #sunburst.sunburst
         //- img(src="~@images/sunburst.svg" alt="sunburst")
 
-    button#draw-button.solid-button Draw
+    button#draw-button.solid-button Quay
+    button#draw-button-stop.solid-button Dừng lại
+
 
   #settings.settings
     #settings-panel.settings__panel

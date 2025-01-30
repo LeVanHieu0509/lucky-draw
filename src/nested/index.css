@@ -736,7 +736,10 @@ ul:last-child {
   overflow: hidden;
   padding-bottom: 80px;
   background-color: #051e39;
-  background: linear-gradient(#051e39, #88233a);
+  /* background: linear-gradient(#051e39, #88233a);
+   */
+  background-image: url("../assets/images/quay-so.png");
+
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: cover;
@@ -6181,7 +6184,7 @@ video {
   --tw-backdrop-invert: ;
   --tw-backdrop-opacity: ;
   --tw-backdrop-saturate: ;
-  --tw-backdrop-sepia:         
+  --tw-backdrop-sepia:              
             ;
 }
 
@@ -6232,7 +6235,7 @@ video {
   --tw-backdrop-invert: ;
   --tw-backdrop-opacity: ;
   --tw-backdrop-saturate: ;
-  --tw-backdrop-sepia:         
+  --tw-backdrop-sepia:              
             ;
 }
 

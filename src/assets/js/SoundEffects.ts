@@ -20,6 +20,8 @@ interface SoundSeries {
 export default class SoundEffects {
   /** Audio context instancce */
   private audioContext?: AudioContext;
+  private currentOscillator: OscillatorNode | null = null;
+  private currentGainNode: GainNode | null = null;
 
   /** Indicator for whether this sound effect instance is muted */
   private isMuted: boolean;
@@ -98,6 +100,9 @@ export default class SoundEffects {
 
     oscillator.start(audioCurrentTime);
     oscillator.stop(audioCurrentTime + totalDuration);
+
+    this.currentOscillator = oscillator;
+    this.currentGainNode = gainNode;
   }
 
   /**
@@ -163,5 +168,29 @@ export default class SoundEffects {
         resolve(true);
       }, totalDuration * 1000);
     });
+  }
+
+  public stop(): void {
+    if (!this.audioContext || this.audioContext.state === "closed") {
+      console.warn("Audio context is already closed or not initialized.");
+      return;
+    }
+
+    if (this.currentGainNode) {
+      this.currentGainNode.gain.setValueAtTime(
+        0,
+        this.audioContext.currentTime,
+      ); // Dừng âm thanh ngay lập tức
+      this.currentGainNode.disconnect();
+      this.currentGainNode = null;
+    }
+
+    if (this.currentOscillator) {
+      this.currentOscillator.stop();
+      this.currentOscillator.disconnect();
+      this.currentOscillator = null;
+    }
+
+    console.log("Sound stopped.");
   }
 }

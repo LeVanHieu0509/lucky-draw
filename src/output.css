@@ -37,14 +37,17 @@ body {
 }
 
 #app {
-  background: linear-gradient(
+  /* background: linear-gradient(
     240deg,
     #ff462d 0.13%,
     #ff422f 26.19%,
     #ff3634 52.6%,
     #ff223c 79.08%,
     #ff0c45 100%
-  );
+  ); */
+  background-image: url("./assets/images/vong-quay.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #ffffff;
   padding: 0 3.125rem;
   min-height: 100%;
@@ -562,7 +565,7 @@ a:active {
 }
 
 #draw-button {
-  width: 22.5rem;
+  width: 150px;
   max-width: 100%;
   margin: 5.5rem 0 0;
   position: relative;
@@ -575,7 +578,7 @@ a:active {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  box-shadow: 0.625rem 0.625rem 0 rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0.625rem 0.625rem 0 rgba(0, 0, 0, 0.2); */
   border-radius: 0.625rem;
   background-color: #ffbf1f;
   color: #ffffff;

@@ -44,7 +44,6 @@ export default class Slot {
   private onNameListChanged?: NonNullable<
     SlotConfigurations["onNameListChanged"]
   >;
-
   /**
    * Constructor of Slot
    * @param maxReelItems  Maximum item inside a reel
@@ -153,10 +152,6 @@ export default class Slot {
     return result;
   }
 
-  /**
-   * Function for spinning the slot
-   * @returns Whether the spin is completed successfully
-   */
   public async spin(): Promise<boolean> {
     if (!this.nameList.length) {
       console.error("Name List is empty. Cannot start spinning.");
@@ -172,29 +167,20 @@ export default class Slot {
       return false;
     }
 
-    // Shuffle names and create reel items
     let randomNames = Slot.shuffleNames<string>(this.nameList);
-
     while (randomNames.length && randomNames.length < this.maxReelItems) {
       randomNames = [...randomNames, ...randomNames];
     }
 
-    randomNames = randomNames.slice(
-      0,
-      this.maxReelItems - Number(this.havePreviousWinner),
-    );
+    randomNames = randomNames.slice(0, this.maxReelItems);
 
     const fragment = document.createDocumentFragment();
-
     randomNames.forEach((name) => {
       const newReelItem = document.createElement("div");
       newReelItem.innerHTML = name;
       fragment.appendChild(newReelItem);
     });
 
-    reelContainer.appendChild(fragment);
-
-    console.info("Displayed items: ", randomNames);
     console.info("Winner: ", randomNames[randomNames.length - 1]);
 
     // Remove winner form name list if necessary
@@ -206,21 +192,30 @@ export default class Slot {
         1,
       );
     }
-
     console.info("Remaining: ", this.nameList);
 
-    // Play the spin animation
-    const animationPromise = new Promise((resolve) => {
-      reelAnimation.onfinish = resolve;
-    });
+    reelContainer.appendChild(fragment);
 
-    reelAnimation.play();
+    // Tạo và phát animation
+    this.reelAnimation = reelContainer.animate(
+      [
+        { transform: "none", filter: "blur(0)" },
+        { filter: "blur(1px)", offset: 0.5 },
+        {
+          transform: `translateY(-${(this.maxReelItems - 1) * (7.5 * 16)}px)`,
+          filter: "blur(0)",
+        },
+      ],
+      {
+        duration: this.maxReelItems * 100,
+        easing: "ease-in-out",
+        iterations: 1,
+      },
+    );
 
-    await animationPromise;
-
-    // Sets the current playback time to the end of the animation
-    // Fix issue for animatin not playing after the initial play on Safari
-    reelAnimation.finish();
+    if (this.reelAnimation) {
+      await new Promise((resolve) => (this.reelAnimation!.onfinish = resolve));
+    }
 
     Array.from(reelContainer.children)
       .slice(0, reelContainer.children.length - 1)
@@ -232,5 +227,28 @@ export default class Slot {
       this.onSpinEnd();
     }
     return true;
+  }
+
+  public async stop() {
+    if (this.reelAnimation) {
+      this.reelAnimation.cancel(); // Hủy animation nếu có
+    }
+
+    // Lấy winner cuối cùng trên reel
+    let winner: string | null = null;
+    if (this.reelContainer) {
+      const reelItems = this.reelContainer.children;
+      if (reelItems.length > 0) {
+        winner = reelItems[reelItems.length - 1].textContent;
+      }
+
+      const winnerElement = document.createElement("div");
+      winnerElement.innerHTML = `${winner ?? ""}`;
+      this.reelContainer.innerHTML = winnerElement.outerHTML;
+    }
+
+    if (this.onSpinEnd) {
+      this.onSpinEnd();
+    }
   }
 }

@@ -7,6 +7,9 @@ import Slot from "@js/Slot";
   const drawButton = document.getElementById(
     "draw-button",
   ) as HTMLButtonElement | null;
+  const drawButtonStop = document.getElementById("draw-button-stop") as
+    | HTMLButtonElement
+    | any;
   const fullscreenButton = document.getElementById(
     "fullscreen-button",
   ) as HTMLButtonElement | null;
@@ -72,7 +75,7 @@ import Slot from "@js/Slot";
   }
 
   const soundEffects = new SoundEffects();
-  const MAX_REEL_ITEMS = 40;
+  const MAX_REEL_ITEMS = 100;
   const CONFETTI_COLORS = [
     "#26ccff",
     "#a25afd",
@@ -82,6 +85,7 @@ import Slot from "@js/Slot";
     "#ffa62d",
     "#ff36ff",
   ];
+
   let confettiAnimationId;
 
   /** Confeetti animation instance */
@@ -168,6 +172,14 @@ import Slot from "@js/Slot";
     }
 
     slot.spin();
+  });
+
+  drawButtonStop.addEventListener("click", () => {
+    soundEffects.stop();
+    slot.stop();
+
+    drawButton.disabled = true;
+    settingsButton.disabled = true;
   });
 
   // Click handler for "Fullscreen" button
