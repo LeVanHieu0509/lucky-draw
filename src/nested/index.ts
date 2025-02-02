@@ -19,7 +19,7 @@ import "../../src/style.css";
   }
 
   const soundEffects = new SoundEffects();
-  const MAX_REEL_ITEMS = 100;
+  const MAX_REEL_ITEMS = 300;
   const CONFETTI_COLORS = [
     "#26ccff",
     "#a25afd",

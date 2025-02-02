@@ -34,6 +34,7 @@ body {
     "Microsoft JhengHei UI", "Microsoft YaHei", "Microsoft YaHei UI",
     "PingFang TC", "Lantinghei TC", "Heiti TC", "Apple LiGothic", "PMingLiU",
     Arial, sans-serif;
+  overflow: hidden;
 }
 
 #app {
@@ -431,7 +432,7 @@ a:active {
 }
 .reel > div {
   height: 7.5rem;
-  font-size: 3.75rem;
+  font-size: 32px;
   font-weight: bold;
   text-align: center;
   line-height: 7.5rem;
@@ -626,7 +627,7 @@ a:active {
   height: 100%;
   width: 100%;
   max-width: 33.125rem;
-  padding: 3.125rem 3.125rem 0 3.125rem;
+  padding: 3.125rem 3.125rem 3.125rem 3.125rem;
   overflow: auto;
   -webkit-overflow-scrolling: auto;
 }
@@ -655,12 +656,13 @@ a:active {
 }
 
 .input-field {
+  height: 300px;
   background-color: #e8e8e8;
   border-radius: 0.25rem;
   border: none;
-  padding: 1.875rem 1.875rem;
+  padding: 16px;
   font-family: inherit;
-  font-size: 1.5rem;
+  font-size: 14px;
   line-height: 1.25em;
   color: #000000;
   outline: none;

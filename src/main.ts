@@ -75,7 +75,7 @@ import Slot from "@js/Slot";
   }
 
   const soundEffects = new SoundEffects();
-  const MAX_REEL_ITEMS = 100;
+  const MAX_REEL_ITEMS = 400;
   const CONFETTI_COLORS = [
     "#26ccff",
     "#a25afd",
@@ -180,6 +180,17 @@ import Slot from "@js/Slot";
 
     drawButton.disabled = true;
     settingsButton.disabled = true;
+  });
+
+  drawButtonStop.addEventListener("keyup", (event) => {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+      soundEffects.stop();
+      slot.stop();
+
+      drawButton.disabled = true;
+      settingsButton.disabled = true;
+    }
   });
 
   // Click handler for "Fullscreen" button

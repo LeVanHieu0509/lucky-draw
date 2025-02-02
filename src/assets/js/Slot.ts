@@ -53,7 +53,7 @@ export default class Slot {
    * @param onNameListChanged  Callback function that runs when user updates the name list
    */
   constructor({
-    maxReelItems = 30,
+    maxReelItems = 100,
     removeWinner = true,
     reelContainerSelector,
     onSpinStart,
