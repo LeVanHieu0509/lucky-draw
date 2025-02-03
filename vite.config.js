@@ -15,7 +15,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, "src/index.html"), // File HTML chính
-        nested: resolve(__dirname, "src/nested/index.html"), // File HTML phụ
+        slot: resolve(__dirname, "src/slot/index.html"), // File HTML phụ
       },
       output: {
         dir: resolve(__dirname, "dist"), // Thư mục đầu ra chính
