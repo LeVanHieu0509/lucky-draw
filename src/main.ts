@@ -123,7 +123,7 @@ import Slot from "@js/Slot";
     }
     sunburstSvg.style.display = "none";
   };
-
+  let checkEnter = false;
   /**  Function to be trigger before spinning */
   const onSpinStart = () => {
     stopWinningAnimation();
@@ -172,23 +172,25 @@ import Slot from "@js/Slot";
       return;
     }
     drawButtonStop.disabled = false;
+    checkEnter = true;
     slot.spin();
   });
 
   drawButtonStop.addEventListener("click", () => {
     soundEffects.stop();
     slot.stop();
-
+    checkEnter = false;
     drawButtonStop.disabled = true;
     settingsButton.disabled = true;
   });
 
-  drawButtonStop.addEventListener("keyup", (event) => {
-    event.preventDefault();
-    if (event.keyCode === 13) {
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && checkEnter) {
+      checkEnter = false;
       soundEffects.stop();
       slot.stop();
 
+      drawButtonStop.disabled = true;
       settingsButton.disabled = true;
     }
   });

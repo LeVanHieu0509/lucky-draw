@@ -80,7 +80,7 @@ import "../../src/style.css";
     confettiAnimation();
     await soundEffects.win();
   };
-
+  let checkEnter = false;
   /** Slot instance */
   /** Slot instances */
   const slot1 = new SlotNumber({
@@ -128,7 +128,6 @@ import "../../src/style.css";
     slot2.names = [...slot2NameList];
     slot3.names = [...slot3NameList];
 
-    console.log("random_winner", random_winner());
     const [num1, num2, num3] = random_winner();
     // Sử dụng Promise.all để chạy đồng thời với độ trễ 100ms giữa mỗi slot
     Promise.all([
@@ -148,6 +147,22 @@ import "../../src/style.css";
     onSpinEnd();
     disableButton(spinReset);
     enableButton(spinButton);
+    checkEnter = false;
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && checkEnter) {
+      checkEnter = false;
+      Promise.all([
+        slot1.stop(),
+        delay(300).then(() => slot2.stop()),
+        delay(500).then(() => slot3.stop()),
+      ]).catch((error) => console.error("Error in rollAll:", error));
+      soundEffects.stop();
+      onSpinEnd();
+      disableButton(spinReset);
+      enableButton(spinButton);
+    }
   });
 
   if (spinButton) {
@@ -156,6 +171,7 @@ import "../../src/style.css";
       rollAll();
       disableButton(spinButton);
       enableButton(spinReset);
+      checkEnter = true;
     });
   } else {
     console.error("Spin button not found!");
