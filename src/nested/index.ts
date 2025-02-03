@@ -110,8 +110,14 @@ import "../../src/style.css";
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const rollAll = async () => {
-    const min = parseInt(validateMin(inputMin.value), 10);
-    const max = parseInt(validateMax(inputMax.value), 10);
+    const min = parseInt(
+      validateMin(inputMin.value, parseInt(inputMax.value, 10)),
+      10,
+    );
+    const max = parseInt(
+      validateMax(inputMin.value, parseInt(inputMax.value, 10)),
+      10,
+    );
     console.log({ min, max });
 
     const generateNameList = (start: number, end: number): string[] => {

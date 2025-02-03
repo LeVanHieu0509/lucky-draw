@@ -138,9 +138,10 @@ import Slot from "@js/Slot";
     sunburstSvg.style.display = "block";
     await soundEffects.win();
     drawButton.disabled = false;
+    drawButtonStop.disabled = true;
     settingsButton.disabled = false;
   };
-
+  drawButtonStop.disabled = true;
   /** Slot instance */
   const slot = new Slot({
     reelContainerSelector: "#reel",
@@ -170,7 +171,7 @@ import Slot from "@js/Slot";
       onSettingsOpen();
       return;
     }
-
+    drawButtonStop.disabled = false;
     slot.spin();
   });
 
@@ -178,7 +179,7 @@ import Slot from "@js/Slot";
     soundEffects.stop();
     slot.stop();
 
-    drawButton.disabled = true;
+    drawButtonStop.disabled = true;
     settingsButton.disabled = true;
   });
 
@@ -188,7 +189,6 @@ import Slot from "@js/Slot";
       soundEffects.stop();
       slot.stop();
 
-      drawButton.disabled = true;
       settingsButton.disabled = true;
     }
   });
