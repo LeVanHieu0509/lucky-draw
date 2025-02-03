@@ -110,15 +110,8 @@ import "../../src/style.css";
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const rollAll = async () => {
-    const min = parseInt(
-      validateMin(inputMin.value, parseInt(inputMax.value, 10)),
-      10,
-    );
-    const max = parseInt(
-      validateMax(inputMin.value, parseInt(inputMax.value, 10)),
-      10,
-    );
-    console.log({ min, max });
+    const min = parseInt(inputMin.value);
+    const max = parseInt(inputMax.value);
 
     const generateNameList = (start: number, end: number): string[] => {
       const list: string[] = [];
@@ -136,6 +129,10 @@ import "../../src/style.css";
 
     const slot3Min = min % 10;
     const slot3Max = max % 10;
+
+    console.log({ slot1Min, slot1Max });
+    console.log({ slot2Min, slot2Max });
+    console.log({ slot3Min, slot3Max });
 
     const slot1NameList = generateNameList(slot1Min, slot1Max);
     const slot2NameList = generateNameList(slot2Min, slot2Max);
@@ -193,7 +190,7 @@ import "../../src/style.css";
 
   const validateMin = (value: string, max: number): string => {
     const num = parseInt(value, 10);
-    if (isNaN(num) || num < 0 || num > max) {
+    if (isNaN(num) || num <= 0 || num > max) {
       return "001";
     }
     return num.toString().padStart(3, "0");
