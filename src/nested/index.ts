@@ -110,9 +110,6 @@ import "../../src/style.css";
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const rollAll = async () => {
-    const min = parseInt(inputMin.value);
-    const max = parseInt(inputMax.value);
-
     const generateNameList = (start: number, end: number): string[] => {
       const list: string[] = [];
       for (let i = start; i <= end; i++) {
@@ -122,29 +119,22 @@ import "../../src/style.css";
       return list;
     };
 
-    const slot1Min = Math.floor(min / 100);
-    const slot1Max = Math.floor(max / 100);
-
-    const slot2Min = Math.floor((min % 100) / 10);
-    const slot2Max = Math.floor((max % 100) / 10);
-
-    const slot3Min = min % 10;
-    const slot3Max = max % 10;
-
-    const slot1NameList = generateNameList(slot1Min, slot1Max);
-    const slot2NameList = generateNameList(slot2Min, slot2Max);
-    const slot3NameList = generateNameList(slot3Min, slot3Max);
+    const slot1NameList = generateNameList(0, 9);
+    const slot2NameList = generateNameList(0, 9);
+    const slot3NameList = generateNameList(0, 9);
 
     // Gán danh sách số cho cả 3 slot
     slot1.names = [...slot1NameList];
     slot2.names = [...slot2NameList];
     slot3.names = [...slot3NameList];
 
+    console.log("random_winner", random_winner());
+    const [num1, num2, num3] = random_winner();
     // Sử dụng Promise.all để chạy đồng thời với độ trễ 100ms giữa mỗi slot
     Promise.all([
-      slot1.spin(),
-      delay(300).then(() => slot2.spin()),
-      delay(500).then(() => slot3.spin()),
+      slot1.spin(num1),
+      delay(300).then(() => slot2.spin(num2)),
+      delay(500).then(() => slot3.spin(num3)),
     ]).catch((error) => console.error("Error in rollAll:", error));
   };
 
@@ -171,6 +161,26 @@ import "../../src/style.css";
     console.error("Spin button not found!");
   }
 
+  const random_winner = () => {
+    let listWinnerNum: number[] = [];
+
+    const min = parseInt(inputMin.value, 10);
+    const max = parseInt(inputMax.value, 10);
+
+    let randNum = Math.floor(Math.random() * (max - min + 1) + min);
+    if (listWinnerNum.length === max - min + 1) {
+      listWinnerNum = [];
+      return randNum.toString().padStart(3, "0");
+    }
+
+    while (listWinnerNum.includes(randNum)) {
+      console.log("re-random", randNum);
+      randNum = Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    listWinnerNum.push(randNum);
+    return randNum.toString().padStart(3, "0").split("");
+  };
+
   const disableButton = (button: any) => {
     button.classList.add("disabled");
     button.style.opacity = "0.8";
@@ -187,7 +197,6 @@ import "../../src/style.css";
 
   const validateMin = (value: string, max: number): string => {
     const num = parseInt(value, 10);
-
     if (isNaN(num) || num <= 0 || num > max) {
       return "001";
     }
@@ -209,11 +218,13 @@ import "../../src/style.css";
   inputMin.addEventListener("change", (event) => {
     const target = event.target as HTMLInputElement;
     target.value = validateMin(target.value, parseInt(inputMax.value, 10));
+    console.log(target.value);
   });
 
   inputMax.addEventListener("change", (event) => {
     const target = event.target as HTMLInputElement;
     target.value = validateMax(target.value, parseInt(inputMin.value, 10));
+    console.log(target.value);
   });
 
   disableButton(spinReset);

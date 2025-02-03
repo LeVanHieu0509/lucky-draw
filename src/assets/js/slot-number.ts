@@ -152,7 +152,7 @@ export default class SlotNumber {
     return result;
   }
 
-  public async spin(): Promise<boolean> {
+  public async spin(number: string): Promise<boolean> {
     console.log("spin", this.nameList);
 
     if (!this.nameList.length) {
@@ -177,7 +177,7 @@ export default class SlotNumber {
     }
 
     randomNames = randomNames.slice(0, this.maxReelItems);
-
+    randomNames = randomNames.concat(number.toString());
     const fragment = document.createDocumentFragment();
 
     randomNames.forEach((name) => {
@@ -249,17 +249,16 @@ export default class SlotNumber {
   }
 
   public async stop() {
-    if (this.reelAnimation) {
-      this.reelAnimation.cancel(); // Hủy animation nếu có
-    }
-
     // Lấy winner cuối cùng trên reel
     let winner: string | null = null;
+    console.log("this.reelContainer", this.reelContainer);
     if (this.reelContainer) {
       const reelItems = this.reelContainer.children;
       if (reelItems.length > 0) {
         winner = reelItems[reelItems.length - 1].textContent;
       }
+
+      console.log({ winner });
 
       const slotMachineContainer = document.createElement("div");
       slotMachineContainer.style.transition = "1.236s ease-out";
@@ -277,7 +276,7 @@ export default class SlotNumber {
       const slotSpan = document.createElement("span");
       slotSpan.classList.add("ng-binding", "ng-scope");
       slotSpan.textContent = `${winner ?? ""}`; // Gán tên số ngẫu nhiên vào span
-
+      console.log("slotSpan.textContent", slotSpan.textContent);
       // Gán span vào slotNumber
       slotNumber.appendChild(slotSpan);
       // Gán slotNumber vào newReelItem
@@ -285,11 +284,13 @@ export default class SlotNumber {
       // Gán newReelItem vào slotMachineContainer
       slotMachineContainer.appendChild(newReelItem);
 
-      this.reelContainer.appendChild(slotMachineContainer);
+      if (this.reelContainer) {
+        this.reelContainer.replaceChildren(slotMachineContainer);
+      }
     }
 
-    // if (this.onSpinEnd) {
-    //   this.onSpinEnd();
-    // }
+    if (this.reelAnimation) {
+      this.reelAnimation.cancel(); // Hủy animation nếu có
+    }
   }
 }
