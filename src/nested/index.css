@@ -2246,8 +2246,6 @@ img.logo,
 }
 
 .section-prize .section-head-actions {
-  border: 3px solid #f5db79;
-  background: #393264;
   border-radius: 0;
   font-size: 20px;
   letter-spacing: 1px;
@@ -2256,7 +2254,7 @@ img.logo,
   /*box-shadow: 0 0 25px 9px rgba(255, 219, 87, 0.32);*/
   height: 48px;
   line-height: 42px;
-  margin-top: 13px;
+  margin-top: 33px;
   margin-bottom: 50px;
   display: inline-block;
 }
@@ -2266,9 +2264,17 @@ img.logo,
 }
 
 .section-prize .section-head-actions .prize-text {
-  display: inline-block;
+  /* display: inline-block; */
+  padding-left: 6px;
   vertical-align: top;
   font-weight: 700;
+
+  input {
+    text-align: center;
+    width: 100px;
+    border: 3px solid #f5db79;
+    background: #393264;
+  }
 }
 
 .prize-text.prize-count {
@@ -2297,7 +2303,7 @@ img.logo,
   border-radius: 15px;
   display: inline-block;
   position: relative;
-  top: -3px;
+  top: 20px;
   margin-bottom: 37px;
   max-width: 100%;
 }
@@ -2518,12 +2524,12 @@ span.toggleDel a {
 }
 
 .slot {
-  width: 180px;
+  width: 200px;
   display: inline-block;
   margin: 0 11px 0 10px;
   background: #413971;
   border-radius: 5px;
-  height: 250px;
+  height: 255px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -6184,7 +6190,7 @@ video {
   --tw-backdrop-invert: ;
   --tw-backdrop-opacity: ;
   --tw-backdrop-saturate: ;
-  --tw-backdrop-sepia:                               
+  --tw-backdrop-sepia:                                                                 
             ;
 }
 
@@ -6235,7 +6241,7 @@ video {
   --tw-backdrop-invert: ;
   --tw-backdrop-opacity: ;
   --tw-backdrop-saturate: ;
-  --tw-backdrop-sepia:                               
+  --tw-backdrop-sepia:                                                                 
             ;
 }
 

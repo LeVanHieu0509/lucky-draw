@@ -165,14 +165,17 @@
                           <i class="ion-chevron-left"></i>
                         </a>
 
-                        <span
-                          class="prize-text prize-count ion-person-add ng-binding"
-                          ng-class="$ctrl.animClass.prizecount"
-                          ng-show="$ctrl.prizes[$ctrl.prizeIndex].confirmed"
-                          style=""
-                        >
-                          111 -> 999
-                        </span>
+                        <div class="prize-text">
+                          <input
+                            class="input-min prize-count ion-person-add ng-binding"
+                            value="001"
+                          />
+
+                          <input
+                            class="input-max prize-count ion-person-add ng-binding"
+                            value="999"
+                          />
+                        </div>
 
                         <a
                           class="link-next not-available"
@@ -188,11 +191,6 @@
                       </div>
 
                       <div ng-switch="" on="$ctrl.state" class="section-button">
-                        <!-- ngSwitchWhen: ready -->
-
-                        <!-- ngSwitchWhen: spin -->
-
-                        <!-- ngSwitchWhen: complete -->
                         <div
                           ng-switch-when="complete"
                           class="state-complete ng-scope"
