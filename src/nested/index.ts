@@ -118,6 +118,7 @@ import "../../src/style.css";
       for (let i = start; i <= end; i++) {
         list.push(i.toString());
       }
+
       return list;
     };
 
@@ -129,10 +130,6 @@ import "../../src/style.css";
 
     const slot3Min = min % 10;
     const slot3Max = max % 10;
-
-    console.log({ slot1Min, slot1Max });
-    console.log({ slot2Min, slot2Max });
-    console.log({ slot3Min, slot3Max });
 
     const slot1NameList = generateNameList(slot1Min, slot1Max);
     const slot2NameList = generateNameList(slot2Min, slot2Max);
@@ -190,6 +187,7 @@ import "../../src/style.css";
 
   const validateMin = (value: string, max: number): string => {
     const num = parseInt(value, 10);
+
     if (isNaN(num) || num <= 0 || num > max) {
       return "001";
     }
@@ -198,6 +196,7 @@ import "../../src/style.css";
 
   const validateMax = (value: string, min: number): string => {
     const num = parseInt(value, 10);
+
     if (isNaN(num) || num < min || num > 999) {
       return "999";
     }
@@ -207,18 +206,14 @@ import "../../src/style.css";
   inputMin.value = validateMin(inputMin.value, parseInt(inputMax.value, 10));
   inputMax.value = validateMax(inputMax.value, parseInt(inputMin.value, 10));
 
-  console.log({ inputMin, inputMax });
-
   inputMin.addEventListener("change", (event) => {
     const target = event.target as HTMLInputElement;
     target.value = validateMin(target.value, parseInt(inputMax.value, 10));
-    console.log(target.value);
   });
 
   inputMax.addEventListener("change", (event) => {
     const target = event.target as HTMLInputElement;
     target.value = validateMax(target.value, parseInt(inputMin.value, 10));
-    console.log(target.value);
   });
 
   disableButton(spinReset);

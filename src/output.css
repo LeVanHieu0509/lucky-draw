@@ -398,7 +398,7 @@ a:active {
   position: relative;
 }
 .slot__outer {
-  width: 62.5rem;
+  width: 80rem;
   height: 14.375rem;
   padding: 1.625rem;
   margin: 0 auto;
@@ -432,7 +432,7 @@ a:active {
 }
 .reel > div {
   height: 7.5rem;
-  font-size: 32px;
+  font-size: 42px;
   font-weight: bold;
   text-align: center;
   line-height: 7.5rem;
@@ -489,7 +489,7 @@ a:active {
 }
 
 .slot__outer {
-  width: 62.5rem;
+  width: 75rem;
   height: 14.375rem;
   padding: 1.625rem;
   margin: 0 auto;
