@@ -326,55 +326,31 @@ ul:last-child {
               \* ------------------------------------------------------------ */
 @font-face {
   font-family: "UtmAvo";
-  src:
-    url("../fonts/utmavo-webfont.woff2") format("woff2"),
-    url("../fonts/utmavo-webfont.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "utmAvo";
-  src:
-    url("../fonts/utm-avobold-webfont.woff2") format("woff2"),
-    url("../fonts/utm-avobold-webfont.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Noto Sans";
-  src: url("../fonts/NotoSans-Regular-webfont.eot");
-  src:
-    url("../fonts/NotoSans-Regular-webfont.eot?#iefix")
-      format("embedded-opentype"),
-    url("../fonts/NotoSans-Regular-webfont.woff") format("woff"),
-    url("../fonts/NotoSans-Regular-webfont.ttf") format("truetype"),
-    url("../fonts/NotoSans-Regular-webfont.svg#noto_sansbold") format("svg");
+
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Noto Sans";
-  src: url("../fonts/NotoSans-Bold-webfont.eot");
-  src:
-    url("../fonts/NotoSans-Bold-webfont.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/NotoSans-Bold-webfont.woff") format("woff"),
-    url("../fonts/NotoSans-Bold-webfont.ttf") format("truetype"),
-    url("../fonts/NotoSans-Bold-webfont.svg#noto_sansbold") format("svg");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Ionicons";
-  src: url("../fonts/ionicons.eot");
-  src:
-    url("../fonts/ionicons.eot#iefix") format("embedded-opentype"),
-    url("../fonts/ionicons.ttf") format("truetype"),
-    url("../fonts/ionicons.woff") format("woff"),
-    url("../fonts/ionicons.svg#Ionicons") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -6190,7 +6166,7 @@ video {
   --tw-backdrop-invert: ;
   --tw-backdrop-opacity: ;
   --tw-backdrop-saturate: ;
-  --tw-backdrop-sepia:                                                                  
+  --tw-backdrop-sepia:                                                                         
             ;
 }
 
@@ -6241,7 +6217,7 @@ video {
   --tw-backdrop-invert: ;
   --tw-backdrop-opacity: ;
   --tw-backdrop-saturate: ;
-  --tw-backdrop-sepia:                                                                  
+  --tw-backdrop-sepia:                                                                        
             ;
 }
 
