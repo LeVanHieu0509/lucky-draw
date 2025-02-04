@@ -193,6 +193,8 @@ import "../../src/style.css";
 
     if (listWinnerNum.length === max - min + 1) {
       listWinnerNum = [];
+      listWinnerNum.push(randNum);
+      sessionStorage.setItem("listWinner", JSON.stringify(listWinnerNum));
       return randNum.toString().padStart(3, "0").split("");
     }
 
