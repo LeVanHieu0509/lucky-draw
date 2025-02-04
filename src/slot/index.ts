@@ -178,22 +178,33 @@ import "../../src/style.css";
   }
 
   const random_winner = () => {
+    const listWinner = sessionStorage.getItem("listWinner");
+
     let listWinnerNum: number[] = [];
+
+    if (listWinner) {
+      listWinnerNum = JSON.parse(listWinner) ?? [];
+    }
 
     const min = parseInt(inputMin.value, 10);
     const max = parseInt(inputMax.value, 10);
 
     let randNum = Math.floor(Math.random() * (max - min + 1) + min);
+
     if (listWinnerNum.length === max - min + 1) {
       listWinnerNum = [];
-      return randNum.toString().padStart(3, "0");
+      return randNum.toString().padStart(3, "0").split("");
     }
 
     while (listWinnerNum.includes(randNum)) {
       console.log("re-random", randNum);
       randNum = Math.floor(Math.random() * (max - min + 1) + min);
     }
+
     listWinnerNum.push(randNum);
+
+    sessionStorage.setItem("listWinner", JSON.stringify(listWinnerNum));
+
     return randNum.toString().padStart(3, "0").split("");
   };
 
