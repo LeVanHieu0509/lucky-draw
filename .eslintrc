@@ -1,113 +1,112 @@
 {
-  "env":{
+  "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
   },
-  "extends": [
-    "eslint:recommended",
-    "airbnb-base"
-  ],
+  "extends": ["eslint:recommended", "airbnb-base"],
   "settings": {
     "import/resolver": [
       "node",
       {
-        "webpack": {
-          "config": "./webpack/webpack.base.conf.js"
-        },
-        "extensions": [".js, .ts"]
-      }
-    ]
+        // "webpack": {
+        //   "config": "./webpack/webpack.base.conf.js"
+        // },
+        "extensions": [".js, .ts"],
+      },
+    ],
   },
   "rules": {
-    "import/extensions": ["error", {
-      "js": "never",
-      "ts": "never"
-    }],
+    "import/extensions": [
+      "error",
+      {
+        "js": "never",
+        "ts": "never",
+      },
+    ],
     "import/no-extraneous-dependencies": [
       "error",
       {
         "devDependencies": true,
         "optionalDependencies": false,
-        "peerDependencies": false
-      }
+        "peerDependencies": false,
+      },
     ],
     "comma-dangle": ["error", "never"],
-    "no-console": ["warn", { "allow": ["warn", "error"] }]
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
   },
   "overrides": [
     {
       "files": ["**/*.ts"],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
-        "project": "./tsconfig.json"
+        "project": "./tsconfig.json",
       },
-      "plugins": [
-        "@typescript-eslint"
-      ],
+      "plugins": ["@typescript-eslint"],
       "extends": [
         "eslint:recommended",
         "airbnb-base",
         "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
       ],
       "settings": {
         "import/resolver": [
           "node",
           {
-            "webpack": {
-              "config": "./webpack/webpack.base.conf.js"
-            },
-            "extensions": [".js, .ts"]
-          }
-        ]
+            // "webpack": {
+            //   "config": "./webpack/webpack.base.conf.js",
+            // },
+            "extensions": [".js, .ts"],
+          },
+        ],
       },
       "rules": {
-        "import/extensions": ["error", {
-          "js": "never",
-          "ts": "never"
-        }],
+        "import/extensions": [
+          "error",
+          {
+            "js": "never",
+            "ts": "never",
+          },
+        ],
         "import/no-extraneous-dependencies": [
           "error",
           {
             "devDependencies": true,
             "optionalDependencies": false,
-            "peerDependencies": false
-          }
+            "peerDependencies": false,
+          },
         ],
         "comma-dangle": ["error", "never"],
-        "no-console": ["warn", { "allow": ["warn", "error", "info"] }]
+        "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
       },
     },
     {
       "files": ["webpack/**/*.js", "scripts/**/*.js"],
-      "env":{
-        "node": true
+      "env": {
+        "node": true,
       },
-      "extends": [
-        "eslint:recommended",
-        "airbnb-base"
-      ],
+      "extends": ["eslint:recommended", "airbnb-base"],
       "settings": {
-        "import/resolver": [
-          "node"
-        ]
+        "import/resolver": ["node"],
       },
       "rules": {
-        "import/extensions": ["error", {
-          "js": "never",
-          "ts": "never"
-        }],
+        "import/extensions": [
+          "error",
+          {
+            "js": "never",
+            "ts": "never",
+          },
+        ],
         "import/no-extraneous-dependencies": [
           "error",
           {
             "devDependencies": true,
             "optionalDependencies": false,
-            "peerDependencies": false
-          }
+            "peerDependencies": false,
+          },
         ],
         "comma-dangle": ["error", "never"],
-        "no-console": ["off"]
-      }
-    }
-  ]
+        "no-console": ["off"],
+      },
+    },
+  ],
 }
