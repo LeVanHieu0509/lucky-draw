@@ -2216,6 +2216,22 @@ img.logo,
 
 /* ------------------------------------------------------------ *	Section
               \* ------------------------------------------------------------ */
+.section-prize {
+  padding-top: 150px;
+}
+
+@media (min-height: 900px) {
+  .section-prize {
+    padding-top: 230px;
+  }
+}
+
+@media (min-height: 1200px) {
+  .section-prize {
+    padding-top: 270px;
+  }
+}
+
 .section-prize .section-head {
   max-width: 442px;
   margin: 0 auto;
@@ -2230,8 +2246,8 @@ img.logo,
   /*box-shadow: 0 0 25px 9px rgba(255, 219, 87, 0.32);*/
   height: 48px;
   line-height: 42px;
-  margin-top: 33px;
-  margin-bottom: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: inline-block;
 }
 
@@ -4599,7 +4615,6 @@ tr.even > td {
 
 .section-message {
   position: relative;
-  height: 120px;
 }
 
 .section-message h2 {
@@ -6166,7 +6181,7 @@ video {
   --tw-backdrop-invert: ;
   --tw-backdrop-opacity: ;
   --tw-backdrop-saturate: ;
-  --tw-backdrop-sepia:                                                                         
+  --tw-backdrop-sepia:                                                                                          
             ;
 }
 
@@ -6217,7 +6232,7 @@ video {
   --tw-backdrop-invert: ;
   --tw-backdrop-opacity: ;
   --tw-backdrop-saturate: ;
-  --tw-backdrop-sepia:                                                                        
+  --tw-backdrop-sepia:                                                                                         
             ;
 }
 
