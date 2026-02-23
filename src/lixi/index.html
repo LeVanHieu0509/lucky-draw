@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bốc thăm lì xì</title>
+  <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body>
+  <div class="lixi-bg"></div>
+
+
+  <main class="lixi-page">
+    <div class="lixi-shell">
+      <section id="lixi-left" class="lixi-left lixi-left--idle" aria-hidden="true">
+        <img class="lixi-left__back" src="../assets/images/element/bao li xi 2.svg" alt="" />
+        <img class="lixi-left__back" src="../assets/images/element/bao li xi 2.svg" alt="" />
+        <img class="lixi-left__front" src="../assets/images/element/bao li xi 2.svg" alt="Bao lì xì" />
+      </section>
+
+      <section class="lixi-panel" aria-label="Bốc thăm lì xì">
+        <h1 class="lixi-title">BỐC THĂM<br />LÌ XÌ</h1>
+
+        <div class="lixi-range">
+          <input id="min-input" class="input-min" inputmode="numeric" value="001" />
+          <input id="max-input" class="input-max" inputmode="numeric" value="999" />
+        </div>
+
+        <div class="lixi-actions">
+          <button class="btn btn-yellow" type="button">Bắt đầu</button>
+          <button class="btn btn-primary" type="button">Dừng lại</button>
+        </div>
+
+        <p class="lixi-hint">Enter lần 1: Bắt đầu · Enter lần 2: Dừng lại</p>
+      </section>
+    </div>
+  </main>
+
+  <div id="result-modal" class="result-modal" aria-hidden="true">
+    <div class="result-modal__backdrop"></div>
+    <div class="result-modal__dialog" role="dialog" aria-modal="true">
+      <button id="result-close" class="result-modal__close" type="button" aria-label="Đóng">
+        ×
+      </button>
+
+      <div class="result-modal__inner">
+        <div class="result-modal__left">
+          <h2 class="result-modal__title-text">Xin chúc mừng</h2>
+        </div>
+
+        <div class="result-modal__right">
+          <div class="result-modal__stack">
+            <div id="result-number" class="result-modal__number">000</div>
+            <canvas id="confetti-canvas" class="confetti"></canvas>
+            <img src="../assets/images/element/light.svg" alt="" class="result-modal__light" />
+            <img src="../assets/images/element/bao li xi mo nap.svg" alt="Bao lì xì Vạn sự như ý"
+              class="result-modal__envelope" />
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./index.ts"></script>
+</body>
+
+</html>
