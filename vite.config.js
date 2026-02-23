@@ -16,6 +16,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "src/index.html"), // File HTML chính
         slot: resolve(__dirname, "src/slot/index.html"), // File HTML phụ
+        lixi: resolve(__dirname, "src/lixi/index.html"), // File HTML lì xì
       },
       output: {
         dir: resolve(__dirname, "dist"), // Thư mục đầu ra chính
