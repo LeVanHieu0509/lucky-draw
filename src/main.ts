@@ -1,3 +1,4 @@
+import "./polyfills";
 import "./style.css";
 import confetti from "canvas-confetti";
 import SoundEffects from "@js/SoundEffects";
