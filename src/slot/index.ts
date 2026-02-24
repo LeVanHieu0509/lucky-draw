@@ -73,7 +73,6 @@ import "../style.css";
   /**  Function to be trigger before spinning */
   const onSpinStart = () => {
     stopWinningAnimation();
-    soundEffects.spin((MAX_REEL_ITEMS - 1) / 10);
   };
 
   /**  Functions to be trigger after spinning */
@@ -138,41 +137,53 @@ import "../style.css";
     ]).catch((error) => console.error("Error in rollAll:", error));
   };
 
-  spinReset.addEventListener("click", () => {
+  const startSpin = () => {
+    if (!spinButton || !spinReset) return;
+
+    console.log("spin");
+    // Play spinning sound (drumroll-style) until we explicitly stop it
+    soundEffects.spin(60);
+    rollAll();
+    disableButton(spinButton);
+    enableButton(spinReset);
+    checkEnter = true;
+  };
+
+  const stopSpin = () => {
     Promise.all([
       slot1.stop(),
       delay(300).then(() => slot2.stop()),
       delay(500).then(() => slot3.stop()),
     ]).catch((error) => console.error("Error in rollAll:", error));
+
     soundEffects.stop();
     onSpinEnd();
     disableButton(spinReset);
     enableButton(spinButton);
     checkEnter = false;
-  });
+  };
+
+  if (spinReset) {
+    spinReset.addEventListener("click", () => {
+      stopSpin();
+    });
+  }
 
   window.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" && checkEnter) {
-      checkEnter = false;
-      Promise.all([
-        slot1.stop(),
-        delay(300).then(() => slot2.stop()),
-        delay(500).then(() => slot3.stop()),
-      ]).catch((error) => console.error("Error in rollAll:", error));
-      soundEffects.stop();
-      onSpinEnd();
-      disableButton(spinReset);
-      enableButton(spinButton);
+    if (event.key === "Enter") {
+      if (checkEnter) {
+        // Đang quay -> dừng
+        stopSpin();
+      } else {
+        // Chưa quay -> bắt đầu
+        startSpin();
+      }
     }
   });
 
   if (spinButton) {
     spinButton.addEventListener("click", () => {
-      console.log("spin");
-      rollAll();
-      disableButton(spinButton);
-      enableButton(spinReset);
-      checkEnter = true;
+      startSpin();
     });
   } else {
     console.error("Spin button not found!");

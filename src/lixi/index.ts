@@ -30,6 +30,7 @@ import "./index.css";
   const resultEnvelope = document.querySelector(
     ".result-modal__envelope",
   ) as HTMLImageElement | null;
+  const lixiBg = document.querySelector(".lixi-bg") as HTMLDivElement | null;
 
   const confettiCanvas = document.getElementById(
     "confetti-canvas",
@@ -46,6 +47,7 @@ import "./index.css";
     !resultClose ||
     !resultDialog ||
     !resultEnvelope ||
+    !lixiBg ||
     !(confettiCanvas instanceof HTMLCanvasElement)
   ) {
     console.error("Lixi: required DOM elements not found.");
@@ -173,6 +175,8 @@ import "./index.css";
     disableButton(stopButton);
     inputMin.disabled = false;
     inputMax.disabled = false;
+    // Reset background về trạng thái chỉ hiển thị nửa dưới
+    lixiBg.classList.remove("lixi-bg--revealed");
   };
 
   const startSpin = () => {
@@ -203,6 +207,9 @@ import "./index.css";
     soundEffects.stop();
     leftEnvelope.classList.remove("lixi-left--shaking");
     leftEnvelope.classList.add("lixi-left--idle");
+
+    // Khi dừng quay, trượt background lên để lộ nửa trên
+    lixiBg.classList.add("lixi-bg--revealed");
 
     const winner = randomWinner();
     disableButton(stopButton);

@@ -35,22 +35,28 @@ body {
 .lixi-bg {
   position: fixed;
   inset: 0;
-  background-image: url('../assets/images/element/Background Quay số.svg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
   z-index: -1;
-  animation: bg-pan 18s ease-in-out infinite alternate;
+  overflow: hidden;
 }
 
-@keyframes bg-pan {
-  from {
-    background-position: 50% 50%;
-  }
+.lixi-bg__inner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 200vh;
+  background-image: url('../assets/images/element/Background Quay số.svg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  /* Ban đầu chỉ hiển thị nửa dưới */
+  transform: translateY(-100vh);
+  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
 
-  to {
-    background-position: 55% 48%;
-  }
+.lixi-bg--revealed .lixi-bg__inner {
+  /* Trượt lên để lộ nửa trên */
+  transform: translateY(0);
 }
 
 .confetti {
@@ -78,6 +84,15 @@ body {
   grid-template-columns: 1.05fr 1fr;
   gap: clamp(24px, 4vw, 56px);
   align-items: center;
+  transition:
+    transform 1.2s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 1.2s ease;
+}
+
+/* Khi background trượt lên, đẩy lixi-shell xuống khỏi viewport (ẩn đi ở nửa dưới) */
+.lixi-bg--revealed ~ .lixi-page .lixi-shell {
+  transform: translateY(100vh);
+  opacity: 0;
 }
 
 /* Left envelope group */
@@ -89,8 +104,18 @@ body {
   filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.45));
 }
 
-.lixi-left__back {
+.lixi-left__back,
+.lixi-left__front {
   position: absolute;
+  display: block;
+  background-image: url('../assets/images/element/bao li xi 2.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  aspect-ratio: 691.46 / 700.44;
+}
+
+.lixi-left__back {
   left: -2%;
   top: 14%;
   width: 54%;
@@ -107,25 +132,44 @@ body {
 }
 
 .lixi-left__front {
-  position: absolute;
   left: 22%;
   top: -2%;
-  width: 66%;
+  width: 76%;
   transform: rotate(-10deg);
+  /* Blend với background để bao lì xì nổi bật hơn */
+  mix-blend-mode: screen;
+  /* Tạo stacking context riêng để ::before nằm sau tấm lì xì mà không chui xuống các phần khác */
+  z-index: 0;
 }
 
-.lixi-left::before {
+/* .lixi-left::before {
   content: '';
   position: absolute;
-  inset: 10%;
-  background: radial-gradient(
-    circle at 45% 45%,
-    rgba(255, 230, 150, 0.55),
-    transparent 65%
-  );
+  inset: 29%;
+  background: radial-gradient(circle at 48% 40%, rgba(255, 230, 150, 0.55), transparent 72%);
   filter: blur(18px);
-  opacity: 0.75;
+  opacity: 1;
   z-index: -1;
+  transform: translateX(33px);
+  height: 350px;
+  width: 250px;
+  top: -60px;
+} */
+
+.lixi-left__front::before {
+  content: '';
+  position: absolute;
+  inset: 2%;
+  background: radial-gradient(
+    circle at 42% 40%,
+    rgba(255, 230, 150, 0.55),
+    transparent 101%
+  );
+  filter: blur(24px);
+  opacity: 1;
+  z-index: -1;
+  transform: translateX(41px);
+  top: 0px;
 }
 
 .lixi-left--idle .lixi-left__front {
@@ -264,7 +308,7 @@ body {
   pointer-events: none;
   transition: opacity 0.25s ease;
   z-index: 60;
-  padding-top: 50px;
+  top: 20%;
 }
 
 .result-modal--open {
@@ -369,11 +413,35 @@ body {
   position: absolute;
   left: 50%;
   top: 26%;
-  width: 100%;
+  width: 140%;
+  aspect-ratio: 1064.7 / 502.25;
+  display: block;
+  background-image: url('../assets/images/element/light.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
   transform: translateX(-50%);
   opacity: 0.95;
   filter: drop-shadow(0 0 18px rgba(255, 220, 120, 0.65));
   animation: light-pulse 1.6s ease-in-out infinite;
+  /* Áp dụng chế độ hòa trộn cho hiệu ứng ánh sáng */
+  mix-blend-mode: screen;
+}
+
+/* Hiệu ứng glow blend tương tự đoạn 151-163 */
+.result-modal__light::before {
+  content: '';
+  position: absolute;
+  inset: 2%;
+  background: radial-gradient(
+    circle at 42% 40%,
+    rgba(255, 230, 150, 0.55),
+    transparent 101%
+  );
+  filter: blur(24px);
+  opacity: 1;
+  z-index: -1;
+  top: 0;
 }
 
 .result-modal__envelope {
