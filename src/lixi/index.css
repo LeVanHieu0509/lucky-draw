@@ -398,10 +398,10 @@ body {
 }
 
 .result-modal__number {
-  left: 16%;
-  top: -45px;
+  left: 0%;
+  top: -89px;
   position: absolute;
-  font-size: clamp(70px, 10vw, 110px);
+  font-size: clamp(90px, 12vw, 160px);
   font-weight: 900;
   letter-spacing: 0.12em;
   margin: 10px 0 6px;
