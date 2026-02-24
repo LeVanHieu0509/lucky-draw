@@ -60,13 +60,21 @@ body {
 }
 
 .confetti {
-  position: fixed;
-  inset: 0;
+  /* Đặt pháo hoa nằm giữa cụm lì xì (result-modal__stack) */
+  position: absolute;
+  left: 00%;
+  top: -5%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: auto;
   pointer-events: none;
-  z-index: 50;
-  top: 11%;
-  left: 43%;
-  height: 200px;
+  z-index: 3;
+  opacity: 0;
+}
+
+/* Pháo b��ng mượt hơn khi hiện trong modal */
+.result-modal--open .confetti {
+  animation: confetti-fade-in 0.6s ease-out forwards;
 }
 
 /* Layout */
@@ -108,7 +116,7 @@ body {
 .lixi-left__front {
   position: absolute;
   display: block;
-  background-image: url('../assets/images/element/bao li xi 2.svg');
+  background-image: url('../assets/images/element/bao_li_xi.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -156,21 +164,19 @@ body {
   top: -60px;
 } */
 
-.lixi-left__front::before {
+/* .lixi-left__front::before {
   content: '';
   position: absolute;
   inset: 2%;
-  background: radial-gradient(
-    circle at 42% 40%,
-    rgba(255, 230, 150, 0.55),
-    transparent 101%
-  );
+  background: radial-gradient(circle at 42% 40%,
+      rgba(255, 230, 150, 0.55),
+      transparent 101%);
   filter: blur(24px);
   opacity: 1;
   z-index: -1;
   transform: translateX(41px);
   top: 0px;
-}
+} */
 
 .lixi-left--idle .lixi-left__front {
   animation: breathe 3.2s ease-in-out infinite;
@@ -308,7 +314,7 @@ body {
   pointer-events: none;
   transition: opacity 0.25s ease;
   z-index: 60;
-  top: 20%;
+  top: 23%;
 }
 
 .result-modal--open {
@@ -324,9 +330,9 @@ body {
 .result-modal__dialog {
   position: relative;
   z-index: 1;
-  width: min(750px, 80vw);
+  width: min(75%, 80vw);
   border-radius: 28px;
-  padding: 34px 36px;
+  padding: 60px 80px;
   /* background:
         radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.14) 0, transparent 55%),
         linear-gradient(180deg, #ff7b3a 0%, #ff3b1f 45%, #ff7b3a 100%); */
@@ -338,6 +344,12 @@ body {
   transition:
     transform 0.28s ease,
     opacity 0.28s ease;
+}
+
+.result-modal__title-image {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
 }
 
 .result-modal--open .result-modal__dialog {
@@ -386,71 +398,86 @@ body {
 }
 
 .result-modal__number {
+  left: 16%;
+  top: -45px;
+  position: absolute;
   font-size: clamp(70px, 10vw, 110px);
   font-weight: 900;
   letter-spacing: 0.12em;
-  margin: 0 0 6px;
+  margin: 10px 0 6px;
   text-align: center;
-  background: linear-gradient(180deg, #fff7c6 0%, #ffd700 55%, #ffb800 100%);
+  /* Vàng đậm giống ảnh 999, có viền đỏ nhẹ và bóng đổ */
+  color: #ffe9a3;
+  background: linear-gradient(180deg, #fff9d1 0%, #ffd95a 45%, #ffb02a 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
-  -webkit-text-stroke: 6px rgba(200, 30, 30, 0.85);
-  text-shadow: 0 18px 36px rgba(0, 0, 0, 0.25);
-  transform: translateY(8px) scale(0.98);
-  opacity: 0.9;
+  text-shadow:
+    0 3px 0 rgba(150, 20, 20, 0.9),
+    0 10px 24px rgba(0, 0, 0, 0.55);
+  transform: translateY(-20px) scale(0.9);
+  opacity: 0;
   transition:
     transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
     opacity 0.35s ease;
+  z-index: 2;
 }
 
 .result-modal--open .result-modal__number {
   transform: translateY(0) scale(1);
-  opacity: 1;
+  opacity: 0.8;
 }
 
 .result-modal__light {
   position: absolute;
   left: 50%;
-  top: 26%;
-  width: 140%;
+  top: -11%;
+  width: 120%;
   aspect-ratio: 1064.7 / 502.25;
   display: block;
-  background-image: url('../assets/images/element/light.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
   transform: translateX(-50%);
   opacity: 0.95;
   filter: drop-shadow(0 0 18px rgba(255, 220, 120, 0.65));
-  animation: light-pulse 1.6s ease-in-out infinite;
-  /* Áp dụng chế độ hòa trộn cho hiệu ứng ánh sáng */
+  animation: light-pulse 1.2s ease-in-out infinite;
   mix-blend-mode: screen;
+  z-index: 1;
 }
 
 /* Hiệu ứng glow blend tương tự đoạn 151-163 */
 .result-modal__light::before {
   content: '';
   position: absolute;
-  inset: 2%;
+  inset: -6%;
   background: radial-gradient(
-    circle at 42% 40%,
+    circle at 36% 40%,
     rgba(255, 230, 150, 0.55),
-    transparent 101%
+    transparent 72%
   );
-  filter: blur(24px);
+  filter: blur(31px);
   opacity: 1;
   z-index: -1;
-  top: 0;
+  transform: translateX(50px);
+  top: 5px;
 }
 
 .result-modal__envelope {
   position: relative;
   z-index: 1;
   display: block;
-  width: 54%;
+  width: 601px;
+  height: 400px;
   margin: 34px auto 0;
   filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.35));
+  transform: translateY(40px) scale(0.9);
+  opacity: 0;
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.5s ease;
+  left: -33%;
+}
+
+.result-modal--open .result-modal__envelope {
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
 @keyframes light-pulse {
@@ -463,6 +490,18 @@ body {
   50% {
     transform: translateX(-50%) scale(1.05);
     opacity: 1;
+  }
+}
+
+@keyframes confetti-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

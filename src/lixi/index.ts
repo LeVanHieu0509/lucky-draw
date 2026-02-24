@@ -84,9 +84,9 @@ import "./index.css";
 
     customConfetti({
       particleCount: 1,
-      gravity: 0.8,
+      gravity: 1,
       spread: 90,
-      origin: { y: 0.6, },
+      origin: { y: 0.7, },
       colors: [
         CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
       ],
@@ -241,16 +241,22 @@ import "./index.css";
   resultClose.addEventListener("click", () => closeModal());
 
   window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      if (resultModal.classList.contains("result-modal--open")) {
+    const isModalOpen = resultModal.classList.contains("result-modal--open");
+
+    // ESC hoặc Enter khi đang mở modal đều đóng modal bằng cùng một hàm
+    if (
+      event.key === "Escape" ||
+      (event.key === "Enter" && isModalOpen)
+    ) {
+      if (isModalOpen) {
         event.preventDefault();
         closeModal();
       }
       return;
     }
 
+    // Chỉ xử lý Enter cho bắt đầu/kết thúc khi modal đã đóng
     if (event.key !== "Enter") return;
-    if (resultModal.classList.contains("result-modal--open")) return;
     if (!isSpinning) startSpin();
     else stopSpin();
   });
