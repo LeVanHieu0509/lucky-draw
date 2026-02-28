@@ -54,7 +54,7 @@ import "./index.css";
     return;
   }
 
-  const soundEffects = new SoundEffects();
+  // const soundEffects = new SoundEffects();
   const CONFETTI_COLORS = [
     "#26ccff",
     "#a25afd",
@@ -161,14 +161,14 @@ import "./index.css";
     resultModal.classList.add("result-modal--open");
     resultModal.setAttribute("aria-hidden", "false");
     confettiAnimation();
-    soundEffects.win();
+    // soundEffects.win();
   };
 
   const closeModal = () => {
     resultModal.classList.remove("result-modal--open");
     resultModal.setAttribute("aria-hidden", "true");
     stopWinningAnimation();
-    soundEffects.stop();
+    // soundEffects.stop();
     leftEnvelope.classList.remove("lixi-left--shaking");
     leftEnvelope.classList.add("lixi-left--idle");
     enableButton(spinButton);
@@ -204,7 +204,7 @@ import "./index.css";
     if (!isSpinning) return;
     isSpinning = false;
 
-    soundEffects.stop();
+    // soundEffects.stop();
     leftEnvelope.classList.remove("lixi-left--shaking");
     leftEnvelope.classList.add("lixi-left--idle");
 
