@@ -197,7 +197,7 @@ import "./index.css";
 
     stopWinningAnimation();
     // Keep drumroll running until user stops (we'll call soundEffects.stop())
-    soundEffects.spin(60);
+    // soundEffects.spin(60);
   };
 
   const stopSpin = () => {

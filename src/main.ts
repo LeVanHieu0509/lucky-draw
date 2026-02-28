@@ -125,6 +125,7 @@ import Slot from "@js/Slot";
     sunburstSvg.style.display = "none";
   };
   let checkEnter = false;
+  let isSpinning = false;
   /**  Function to be trigger before spinning */
   const onSpinStart = () => {
     stopWinningAnimation();
@@ -166,33 +167,55 @@ import Slot from "@js/Slot";
     settingsWrapper.style.display = "none";
   };
 
-  // Click handler for "Draw" button
-  drawButton.addEventListener("click", () => {
+  const startSpin = () => {
+    if (isSpinning) return;
+
+    // Nếu chưa có danh sách tên thì mở setting giống nút \"Bắt đầu\"
     if (!slot.names.length) {
       onSettingsOpen();
       return;
     }
+
+    isSpinning = true;
     drawButtonStop.disabled = false;
     checkEnter = true;
     slot.spin();
-  });
+  };
 
-  drawButtonStop.addEventListener("click", () => {
+  const stopSpin = () => {
+    if (!isSpinning) return;
+
     soundEffects.stop();
     slot.stop();
     checkEnter = false;
+    isSpinning = false;
     drawButtonStop.disabled = true;
     settingsButton.disabled = true;
-  });
+  };
 
+  // Click handler cho \"Bắt đầu\" và \"Dừng lại\"
+  drawButton.addEventListener("click", startSpin);
+  drawButtonStop.addEventListener("click", stopSpin);
+
+  // Nhấn Enter lần 1 để bắt đầu, lần 2 để dừng (khi đã có data)
   window.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" && checkEnter) {
-      checkEnter = false;
-      soundEffects.stop();
-      slot.stop();
+    if (event.key !== "Enter") return;
 
-      drawButtonStop.disabled = true;
-      settingsButton.disabled = true;
+    // Nếu đang nhập trong textarea hoặc input thì bỏ qua để không cản trở người dùng nhập số/tên
+    const target = event.target as HTMLElement | null;
+    if (
+      target &&
+      (target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        (target as HTMLElement).isContentEditable)
+    ) {
+      return;
+    }
+
+    if (!checkEnter) {
+      startSpin();
+    } else {
+      stopSpin();
     }
   });
 

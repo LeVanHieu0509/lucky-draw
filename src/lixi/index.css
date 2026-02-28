@@ -116,7 +116,7 @@ body {
 .lixi-left__front {
   position: absolute;
   display: block;
-  background-image: url('../assets/images/element/bao_li_xi.png');
+  background-image: url('../assets/images/element/bao_li_xi_1.svg');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -224,7 +224,7 @@ body {
 .lixi-title-image {
   display: block;
   margin: 0 auto 18px;
-  width: min(640px, 90vw);
+  width: min(500px, 90vw);
   height: auto;
 }
 
